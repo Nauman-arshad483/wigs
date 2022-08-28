@@ -1,0 +1,16 @@
+
+.contact-us{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 2vmax;
+    background-color: #f6ccee;
+}
+.contact-us>h1{
+    text-align: center;
+    
+}
+.contact-us>p{
+    text-align: center;
+}
