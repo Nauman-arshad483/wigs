@@ -1,88 +1,38 @@
-const mongoose=require("mongoose");
-const productSchema= mongoose.Schema({
-    title:{
-        type:String,
-        required:[true,"Enter product title"]
+const mongoose = require("mongoose");
+const productSchema = mongoose.Schema({
+  title: {
+    type: String,
+    required: [true],
+  },
+  description: {
+    type: String,
+    required: [true],
+  },
+  shipFrom: [{ type: String }],
+  price: {
+    type: Number,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+  sale: {
+    status: {
+      type: Boolean,
+      default: false,
     },
-    description:{
-      type:String,
-      required:[true,"Enter Product description"]
+    percent: {
+      type: Number,
+      default: 0,
     },
-    attributes:[
-        {//for length
-            name:{type:String},
-            details:[
-            {value:{type:Number}}
-            ]
-        },
-        {//for density
-            name:{type:String},
-            details:[
-            {value:{type:Number}},
-            ]
-        },
-        {//for hair color
-           name:{type:String},
-           details:[
-            {value:String},
-           ] 
-        }
-    ],
-    shipFrom:[
-        {value:{type:String}}
-    ],
-    price:{
-        type:Number
-        },
-    createdAt:{
-        type:Date,
-        default:Date.now
-        },
-    sale:{
-        status:{
-        type:Boolean,
-        default:false
-        },
-        percent:{
-            type:Number,
-            default:0
-        }
-    },
-    combinations: [ 
-        {
-            length:Number,
-            density:Number,
-            HairColor:String,
-            quantity:Number,
-            checks:[
-                    {value:{type:Number},status:{type:Boolean}},
-                    {value:{type:Number},status:{type:Boolean}},
-                    {value:{type:Number},status:{type:Boolean}},
-                    {value:{type:Number},status:{type:Boolean}},
-                    {value:{type:Number},status:{type:Boolean}},
-                    {value:{type:Number},status:{type:Boolean}},
-                    {value:{type:Number},status:{type:Boolean}},
-                    {value:{type:Number},status:{type:Boolean}},
-                    {value:{type:Number},status:{type:Boolean}},
-                    {value:{type:Number},status:{type:Boolean}},
-                    {value:{type:Number},status:{type:Boolean}},
-                    {value:{type:Number},status:{type:Boolean}},
-                    {value:{type:Number},status:{type:Boolean}},
-                    {value:{type:Number},status:{type:Boolean}},
-                    {value:{type:Number},status:{type:Boolean}},
-                    {value:{type:Number},status:{type:Boolean}},
-                    {value:{type:Number},status:{type:Boolean}},
-                    {HairColor:{type:String},status:{type:Boolean}},
-                    {HairColor:{type:String},status:{type:Boolean}}
-                   
-                ]
-            }
-            ],
-        // ... more
-    quantity:{
-        total:{type:Number}
-    }
+  },
+  length: [{ type: String }],
+  hairColor: [{ type: String }],
+  density: [{ type: String }],
+  // ... more
+  quantity: {
+    total: { type: Number },
+  },
+});
 
-})
-
-module.exports=mongoose.model("Products",productSchema);
+module.exports = mongoose.model("Products", productSchema);
