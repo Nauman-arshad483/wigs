@@ -1,21 +1,3 @@
-*{
-    margin:0%;
-    padding: 0%;
-}
-.banner{
-    width: 100%;
-    display: flex;
-   
-}
-.banner_section{
-    background-color: #f6ccee;
-    padding: 0 6vmax 4vmax 6vmax;
-}
-
-.banner>img{
-    max-width: 100%;
-    
-}
 .homeHeading{
     text-align: center;
     font-size: 1.4vmax;

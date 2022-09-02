@@ -12,7 +12,17 @@ connectDatabase().then(()=>{
     console.log(err);
     
 })
-app.listen(HTTP_PORT,()=>{
+const server=app.listen(HTTP_PORT,()=>{
  
     console.log(`server is working on http://localhost:${HTTP_PORT}`);
 }) 
+
+//unhandled promise rejection
+process.on("unhandledRejection",err=>{
+    console.log(`Error: ${err.message}`);
+    console.log(`shutting down the server  due to un handled promise rejection`);
+    server.close(()=>{
+        process.exit(1);
+    })
+
+})

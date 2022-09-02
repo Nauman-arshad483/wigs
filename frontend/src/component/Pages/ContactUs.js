@@ -4,8 +4,10 @@ import Form from 'react-bootstrap/Form'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/esm/Col';
 import "./ContactUs.css"
+import MetaData from '../layout/MetaData';
 const ContactUs = () => {
   return <Fragment>
+    <MetaData title="Contact-Innovtiviewigs"/>
     <div className="contact-us">
       
         <h1>GET IN TOUCH</h1>
