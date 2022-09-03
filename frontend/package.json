@@ -22,7 +22,7 @@
     "react-material-ui-carousel": "^3.4.2",
     "react-redux": "^8.0.2",
     "react-router-dom": "^6.3.0",
-    "react-scripts": "^2.1.3",
+    "react-scripts": "^5.0.1",
     "redux": "^4.2.0",
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.4.1",
@@ -52,8 +52,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://192.168.10.3:8080"
- 
-
-
+  "proxy": "http://192.168.0.60:8080"
 }

@@ -8,10 +8,6 @@ const productSchema = mongoose.Schema({
     type: String,
     required: [true],
   },
-  shipFrom: [{ type: String }],
-  price: {
-    type: Number,
-  },
   createdAt: {
     type: Date,
     default: Date.now,
@@ -26,19 +22,27 @@ const productSchema = mongoose.Schema({
       default: 0,
     },
   },
-  length: [{ type: String }],
-  hairColor: [{ type: String }],
-  density: [{ type: String }],
-  // ... more
-  quantity: {
-    total: { type: Number },
-  },
-  images:[
+  images: [
     {
-      type:String,
-      required:true
-    }
-  ]
+      type: String,
+      required: true,
+    },
+  ],
+  variants: [
+    {
+      shipFrom: { type: String, required: true },
+      price: {
+        type: Number,
+        required: true,
+      },
+      length: { type: String },
+      hairColor: { type: String },
+      density: { type: String },
+      quantity: {
+        total: { type: Number },
+      },
+    },
+  ],
 });
 
 module.exports = mongoose.model("Products", productSchema);
