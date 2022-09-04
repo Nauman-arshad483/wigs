@@ -14,7 +14,7 @@
 
 .banner>img{
     max-width: 100%;
-    
+    display: flex   ;
 }
 .homeHeading{
     text-align: center;

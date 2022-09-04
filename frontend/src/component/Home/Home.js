@@ -23,7 +23,7 @@ dispatch(getProduct())
   
  return (
 <Fragment>
-  {loading? (<Loader/>):(<Fragment>
+  
     <MetaData title="Innovtiviewigs"/>
 <div className="banner_section">
 <div className="banner">
@@ -31,7 +31,7 @@ dispatch(getProduct())
 
     </div>
 </div>
-   
+{loading? (<Loader/>):(<Fragment>
     <h2 className='homeHeading'>Featured Collection</h2>
     <div className="container" id='container_p'>
       {products && products.map((product)=><Product product={product}/>)}

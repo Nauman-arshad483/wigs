@@ -4,13 +4,66 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    padding: 2vmax;
+    padding: 4vmax 0vmax 1vmax 0vmax;
     background-color: #f6ccee;
+    flex-basis: 50rem;
+    
+}
+.contact-us-section{
+background-color:  #f6ccee;
+display: flex;
+justify-content: center;
+
+    
 }
 .contact-us>h1{
+   
     text-align: center;
+    font-size: 1.5rem;
+    font-weight:740;
+    color: black;
+    padding-bottom: 1.5vmax;
+    
+    
     
 }
 .contact-us>p{
     text-align: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: black;
+
+}
+.bt-col{
+    display: flex;
+    justify-content: center;
+    
+}
+.contact-bt
+{
+    background-color: black !important;
+}
+.con{
+    background-color: #f6ccee;
+    color: blue;
+    border-radius: 20vmax;
+}
+.form-box{
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+    padding: 0 1.4vmax 0 1.4vmax;
+}
+.reCaptcha>p{
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: black;
+    text-align: center;
+    padding: 0 1.2vmax 0 1.2vmax;
+}
+@media (max-width:770px){
+
+   .form-box{
+    display: block;
+   }
 }
