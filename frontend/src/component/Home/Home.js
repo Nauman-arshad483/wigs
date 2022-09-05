@@ -25,7 +25,7 @@ const Home = () => {
       <MetaData title="Innovtiviewigs" />
       <div className="banner_section">
         <div className="banner">
-          <img src={banner1_image}></img>
+          <img src={banner1_image} alt=""></img>
         </div>
       </div>
       {loading ? (

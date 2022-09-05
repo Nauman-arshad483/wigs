@@ -17,6 +17,16 @@ const ProductDetails = () => {
     dispatch(getProductDetails(id));
   }, [dispatch, id]);
 
+  const handleClick = (e) => {
+    e.preventDefault();
+    let ss = product.variants.filter((item) => {
+      return item.length === e.target.value;
+    });
+    for (let i = 0; i < ss.length; ss++) {
+      product.price = ss[i].price;
+      break;
+    }
+  };
   return (
     <Fragment>
       {loading ? (
@@ -59,6 +69,8 @@ const ProductDetails = () => {
                             size="large"
                             variant="outlined"
                             type="radio"
+                            value={item}
+                            onClick={handleClick}
                           >
                             {item}
                           </Button>
@@ -76,6 +88,8 @@ const ProductDetails = () => {
                             size="large"
                             variant="outlined"
                             type="radio"
+                            value={item}
+                            onClick={handleClick}
                           >
                             {item}
                           </Button>
@@ -94,6 +108,8 @@ const ProductDetails = () => {
                             size="large"
                             variant="outlined"
                             type="radio"
+                            value={item}
+                            onClick={handleClick}
                           >
                             {item}
                           </Button>
