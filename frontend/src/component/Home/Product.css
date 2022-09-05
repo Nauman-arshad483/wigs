@@ -1,23 +1,23 @@
-*{
-    margin:0%;
-    padding: 0%;
+* {
+  margin: 0%;
+  padding: 0%;
 }
 
-.productCard{
-    width: 338px;
-    display: flex;
-    flex-direction: column;
-    text-decoration: none;
-    color: black;
-    margin: 1vmax;
-    transition: all 0.5s;
-    
-    align-items: center;
+.productCard {
+  width: 338px;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: black;
+  margin: 1vmax;
+  transition: all 0.5s;
+
+  align-items: center;
 }
-.productCard>img{
-    width: 338px;
+.productCard > img {
+  width: 338px;
 }
-.productCard>p{
-    justify-content: center;
-    text-align: center;
+.productCard > p {
+  justify-content: center;
+  text-align: center;
 }

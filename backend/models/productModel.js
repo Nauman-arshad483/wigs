@@ -33,12 +33,27 @@ const productSchema = mongoose.Schema({
   quantity: {
     total: { type: Number },
   },
-  images:[
+  images: [
     {
-      type:String,
-      required:true
-    }
-  ]
+      type: String,
+      required: true,
+    },
+  ],
+  variants: [
+    {
+      length: { type: String },
+      hairColor: { type: String },
+      density: { type: String },
+      shipFrom: { type: String },
+      quantity: {
+        total: { type: Number },
+      },
+      price: {
+        type: Number,
+        required: true,
+      },
+    },
+  ],
 });
 
 module.exports = mongoose.model("Products", productSchema);

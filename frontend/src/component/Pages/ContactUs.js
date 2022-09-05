@@ -51,7 +51,8 @@ const ContactUs = () => {
                     backgroundColor: "black",
                     padding: "6px 30px",
                     fontSize: "18px",
-                  }}latest 
+                  }}
+                  latest
                   type="submit"
                 >
                   Send
