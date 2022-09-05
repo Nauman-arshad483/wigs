@@ -8,10 +8,6 @@ const productSchema = mongoose.Schema({
     type: String,
     required: [true],
   },
-  shipFrom: [{ type: String }],
-  price: {
-    type: Number,
-  },
   createdAt: {
     type: Date,
     default: Date.now,
