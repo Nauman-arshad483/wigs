@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import Carousel from "react-material-ui-carousel";
 import "./ProductDetails.css";
 import { useSelector, useDispatch } from "react-redux";
@@ -10,12 +10,22 @@ import Loader from "../layout/Loader/Loader";
 const ProductDetails = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { product, loading, error } = useSelector(
-    (state) => state.productDetails
-  );
+
+  const [price, SetPrice] = useState();
+
   useEffect(() => {
     dispatch(getProductDetails(id));
   }, [dispatch, id]);
+
+  const { product, loading, error } = useSelector(
+    (state) => state.productDetails
+  );
+
+  const [lengthSelected, SetLengthSelected] = useState();
+
+  useEffect(() => {
+    SetPrice(product.price);
+  }, [product.price]);
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -23,7 +33,8 @@ const ProductDetails = () => {
       return item.length === e.target.value;
     });
     for (let i = 0; i < ss.length; ss++) {
-      product.price = ss[i].price;
+      SetPrice(ss[i].price);
+      SetLengthSelected(ss[i].length);
       break;
     }
   };
@@ -55,7 +66,7 @@ const ProductDetails = () => {
                   </div>
                   <div className="bodyBlock">
                     <div className="price">
-                      <p>{`$ ${product.price}`}</p>
+                      <p>{`$ ${price}`}</p>
                     </div>
                     <div>
                       <hr />
@@ -69,7 +80,9 @@ const ProductDetails = () => {
                             size="large"
                             variant="outlined"
                             type="radio"
+                            key={i}
                             value={item}
+                            checked={lengthSelected}
                             onClick={handleClick}
                           >
                             {item}
@@ -82,12 +95,13 @@ const ProductDetails = () => {
                     <div className="density">
                       {product.density ? <h4>Density</h4> : <hr />}
                       {product.density ? (
-                        product.density.map((item) => (
+                        product.density.map((item, i) => (
                           <Button
                             className="density_bt bt"
                             size="large"
                             variant="outlined"
                             type="radio"
+                            key={i}
                             value={item}
                             onClick={handleClick}
                           >
@@ -102,12 +116,13 @@ const ProductDetails = () => {
                     <div className="color">
                       {product.hairColor ? <h4>Hair Color</h4> : <hr />}
                       {product.hairColor ? (
-                        product.hairColor.map((item) => (
+                        product.hairColor.map((item, i) => (
                           <Button
                             className="hairColor_bt bt"
                             size="large"
                             variant="outlined"
                             type="radio"
+                            key={i}
                             value={item}
                             onClick={handleClick}
                           >
