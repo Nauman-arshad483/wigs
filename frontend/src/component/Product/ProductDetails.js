@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect,useState  } from "react";
 import Carousel from "react-material-ui-carousel";
 import "./ProductDetails.css";
 import { useSelector, useDispatch } from "react-redux";
@@ -8,36 +8,89 @@ import { Button } from "@mui/material";
 import Loader from "../layout/Loader/Loader";
 
 const ProductDetails = () => {
+  const [checked, setChecked] = useState(false);
+  const[prod, setProd]=useState([]);
+  const[length, setLength]=useState("");
+  const[color, setColor]=useState("");
+  const[density,setDensity]=useState("")
+  const [first, setFirst] = useState(0);
   const { id } = useParams();
   const dispatch = useDispatch();
-
-  const [price, SetPrice] = useState();
-
-  useEffect(() => {
-    dispatch(getProductDetails(id));
-  }, [dispatch, id]);
-
   const { product, loading, error } = useSelector(
     (state) => state.productDetails
   );
-
-  const [lengthSelected, SetLengthSelected] = useState();
-
+ 
+  function initialize_variant(){
+    console.log("hello nuaman");
+    { product.variants && product.variants[0] && (
+      setFirst(product.variants[0])
+    )}
+  
+    setLength(first.length);
+    setDensity(first.density);
+    setColor(first.hairColor);
+   }
   useEffect(() => {
-    SetPrice(product.price);
-  }, [product.price]);
+    dispatch(getProductDetails(id));
+    console.log(product);
+    setProd(product);
+  }, [dispatch,id]);
+ 
+  useEffect(() => {
+    
+    console.log("nauman")
+    console.log(prod);
+    // { product.variants && product.variants[0] && (
+    //   setFirst(product.variants[0])
+    // )}
+  
+    // console.log(first.length);
+    // console.log(first.density);
+    // console.log(first.hairColor);
+    // setLength(first.length);
+    // setDensity(first.density);
+    // setColor(first.hairColor);
+    
+  }, []);
 
-  const handleClick = (e) => {
-    e.preventDefault();
-    let ss = product.variants.filter((item) => {
-      return item.length === e.target.value;
-    });
-    for (let i = 0; i < ss.length; ss++) {
-      SetPrice(ss[i].price);
-      SetLengthSelected(ss[i].length);
-      break;
-    }
-  };
+  // useEffect(() => {
+  //   console.log(length);
+  //   console.log(density);
+  //   console.log(color);
+   
+    
+  // });
+
+
+ 
+// useEffect(() => {
+   
+//     console.log("before ss")
+//     // condition ? exprIfTrue : exprIfFalse
+//     console.log(product.variants);
+//     let arr1=product.variants;
+//     let ss = arr1.filter((item) => {
+//           let length=14;
+//           return item.length === length;
+        
+//         });
+//     console.log(ss);
+
+      
+//           // return(item.length===length)?item:"not found";
+//           // return(item.length===length&&item.hairColor===color&&item.density===density)?item:"not found";
+
+//           // if(item.length===length&&item.hairColor===color&&item.density==density)
+//           // return vari;
+
+//         // for (let i = 0; i < ss.length; ss++) {
+//         //   SetPrice(ss[i].price);
+//         //   SetLengthSelected(ss[i].length);
+//         //   break;
+//         // }
+//    });
+  
+
   return (
     <Fragment>
       {loading ? (
@@ -66,7 +119,7 @@ const ProductDetails = () => {
                   </div>
                   <div className="bodyBlock">
                     <div className="price">
-                      <p>{`$ ${price}`}</p>
+                      <p>{`$ ${product.price}`}</p>
                     </div>
                     <div>
                       <hr />
@@ -80,10 +133,11 @@ const ProductDetails = () => {
                             size="large"
                             variant="outlined"
                             type="radio"
-                            key={i}
-                            value={item}
-                            checked={lengthSelected}
-                            onClick={handleClick}
+                            checked={length}
+                            onClick={()=>{
+                              setLength(item)
+                              setChecked(!checked)
+                            }}
                           >
                             {item}
                           </Button>
@@ -95,15 +149,17 @@ const ProductDetails = () => {
                     <div className="density">
                       {product.density ? <h4>Density</h4> : <hr />}
                       {product.density ? (
-                        product.density.map((item, i) => (
+                        product.density.map((item) => (
                           <Button
                             className="density_bt bt"
                             size="large"
                             variant="outlined"
                             type="radio"
-                            key={i}
-                            value={item}
-                            onClick={handleClick}
+                            checked={density}
+                            onClick={()=>{
+                              setDensity(item)
+                              setChecked(!checked)
+                            }}
                           >
                             {item}
                           </Button>
@@ -116,15 +172,18 @@ const ProductDetails = () => {
                     <div className="color">
                       {product.hairColor ? <h4>Hair Color</h4> : <hr />}
                       {product.hairColor ? (
-                        product.hairColor.map((item, i) => (
+                        product.hairColor.map((item) => (
                           <Button
                             className="hairColor_bt bt"
                             size="large"
                             variant="outlined"
                             type="radio"
-                            key={i}
-                            value={item}
-                            onClick={handleClick}
+                            checked={color}
+                            onClick={()=>{
+                              setColor(item)
+                              setChecked(!checked)
+                            }
+                          }
                           >
                             {item}
                           </Button>
