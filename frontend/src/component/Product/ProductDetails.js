@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect,useState  } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import Carousel from "react-material-ui-carousel";
 import "./ProductDetails.css";
 import { useSelector, useDispatch } from "react-redux";
@@ -8,88 +8,36 @@ import { Button } from "@mui/material";
 import Loader from "../layout/Loader/Loader";
 
 const ProductDetails = () => {
-  const [checked, setChecked] = useState(false);
-  const[prod, setProd]=useState([]);
-  const[length, setLength]=useState("");
-  const[color, setColor]=useState("");
-  const[density,setDensity]=useState("")
-  const [first, setFirst] = useState(0);
+  const [price, setPrice] = useState();
+  const [length, setLength] = useState("");
+  const [color, setColor] = useState("");
+  const [density, setDensity] = useState("");
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { product, loading, error } = useSelector(
-    (state) => state.productDetails
-  );
- 
-  function initialize_variant(){
-    console.log("hello nuaman");
-    { product.variants && product.variants[0] && (
-      setFirst(product.variants[0])
-    )}
-  
-    setLength(first.length);
-    setDensity(first.density);
-    setColor(first.hairColor);
-   }
+
   useEffect(() => {
     dispatch(getProductDetails(id));
-    console.log(product);
-    setProd(product);
-  }, [dispatch,id]);
- 
-  useEffect(() => {
-    
-    console.log("nauman")
-    console.log(prod);
-    // { product.variants && product.variants[0] && (
-    //   setFirst(product.variants[0])
-    // )}
-  
-    // console.log(first.length);
-    // console.log(first.density);
-    // console.log(first.hairColor);
-    // setLength(first.length);
-    // setDensity(first.density);
-    // setColor(first.hairColor);
-    
   }, []);
 
-  // useEffect(() => {
-  //   console.log(length);
-  //   console.log(density);
-  //   console.log(color);
-   
-    
-  // });
+  const { product, loading } = useSelector((state) => state.productDetails);
 
+  useEffect(() => {
+    const InitVariant = () => {
+      console.log(product, "asda");
+      product && product.variants && setLength(product.variants[0].length);
+      product && product.variants && setDensity(product.variants[0].density);
+      product && product.variants && setColor(product.variants[0].color);
+      product && product.variants && setPrice(product.variants[0].price);
+    };
+    InitVariant();
+  }, [product]);
 
- 
-// useEffect(() => {
-   
-//     console.log("before ss")
-//     // condition ? exprIfTrue : exprIfFalse
-//     console.log(product.variants);
-//     let arr1=product.variants;
-//     let ss = arr1.filter((item) => {
-//           let length=14;
-//           return item.length === length;
-        
-//         });
-//     console.log(ss);
-
-      
-//           // return(item.length===length)?item:"not found";
-//           // return(item.length===length&&item.hairColor===color&&item.density===density)?item:"not found";
-
-//           // if(item.length===length&&item.hairColor===color&&item.density==density)
-//           // return vari;
-
-//         // for (let i = 0; i < ss.length; ss++) {
-//         //   SetPrice(ss[i].price);
-//         //   SetLengthSelected(ss[i].length);
-//         //   break;
-//         // }
-//    });
-  
+  //         // for (let i = 0; i < ss.length; ss++) {
+  //         //   SetPrice(ss[i].price);
+  //         //   SetLengthSelected(ss[i].length);
+  //         //   break;
+  //         // }
+  //    });
 
   return (
     <Fragment>
@@ -119,7 +67,7 @@ const ProductDetails = () => {
                   </div>
                   <div className="bodyBlock">
                     <div className="price">
-                      <p>{`$ ${product.price}`}</p>
+                      <p>{`$ ${price}`}</p>
                     </div>
                     <div>
                       <hr />
@@ -133,10 +81,21 @@ const ProductDetails = () => {
                             size="large"
                             variant="outlined"
                             type="radio"
-                            checked={length}
-                            onClick={()=>{
-                              setLength(item)
-                              setChecked(!checked)
+                            value={item}
+                            checked={length === item}
+                            key={i}
+                            onClick={(e) => {
+                              setLength(e.target.value);
+                              var variant = product.variants.filter(
+                                (item) =>
+                                  item.length === e.target.value &&
+                                  item.density === density &&
+                                  item.color === color
+                              );
+                              if (variant.length > 0) {
+                                console.log(variant)
+                                setPrice(variant[0].price);
+                              }
                             }}
                           >
                             {item}
@@ -149,16 +108,27 @@ const ProductDetails = () => {
                     <div className="density">
                       {product.density ? <h4>Density</h4> : <hr />}
                       {product.density ? (
-                        product.density.map((item) => (
+                        product.density.map((item, i) => (
                           <Button
                             className="density_bt bt"
                             size="large"
                             variant="outlined"
                             type="radio"
-                            checked={density}
-                            onClick={()=>{
-                              setDensity(item)
-                              setChecked(!checked)
+                            key={i}
+                            value={item}
+                            checked={density === item}
+                            onChange={(e) => {
+                              setDensity(e.target.value);
+                              var variant = product.variants.filter(
+                                (item) =>
+                                  item.length === length &&
+                                  item.density === e.target.value &&
+                                  item.color === color
+                              );
+                              if (variant.length > 0) {
+                                console.log(variant)
+                                setPrice(variant[0].price);
+                              }
                             }}
                           >
                             {item}
@@ -172,18 +142,28 @@ const ProductDetails = () => {
                     <div className="color">
                       {product.hairColor ? <h4>Hair Color</h4> : <hr />}
                       {product.hairColor ? (
-                        product.hairColor.map((item) => (
+                        product.hairColor.map((item, i) => (
                           <Button
                             className="hairColor_bt bt"
                             size="large"
                             variant="outlined"
                             type="radio"
-                            checked={color}
-                            onClick={()=>{
-                              setColor(item)
-                              setChecked(!checked)
-                            }
-                          }
+                            value={item}
+                            key={i}
+                            checked={color === item}
+                            onClick={(e) => {
+                              setColor(e.target.value);
+                              var variant = product.variants.filter(
+                                (item) =>
+                                  item.length === length &&
+                                  item.density === density &&
+                                  item.color === e.target.value
+                              );
+                              if (variant.length > 0) {
+                                console.log(variant)
+                                setPrice(variant[0].price);
+                              }
+                            }}
                           >
                             {item}
                           </Button>
