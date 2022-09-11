@@ -31,9 +31,14 @@
   display: flex;
   justify-content: center;
 }
+/* .hairColor_bt{
+  border: solid black 2px;
+} */
 .bt {
   margin-right: 1vmax !important;
   margin-bottom: 1vmax !important;
+  /* border: solid black 2px; */
+
 }
 .bt1 {
   margin-top: 1vmax !important;
